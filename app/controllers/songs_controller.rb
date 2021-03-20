@@ -30,18 +30,20 @@ class SongsController < ApplicationController
     erb :'/songs/show'
   end
 
-  patch "/songs/:id" do
-    @song= Song.find(params[:id])
-    @song.name= params[:song][:name]
+  patch '/songs/:id' do
+    binding.pry
+    @song= Song.find_by_id(params[:id])
+    @song.update(params[:song])
     @song.artist = Artist.find_or_create_by(name: params[:artist][:name])
+    
+    #@song.genre_ids.clear
+    #@song.genre_ids= params[:song][:genre_ids]
+    #@genres= Genre.find(params[:song][:genre_ids])
 
-    @genres= Genre.find(params[:song][:genre_ids])
-
-    @song.genre_ids.clear
-    @genres.each do |genre|
-      song_genre= SongGenre.new(song: @song, genre: genre)
-      song_genre.save
-    end
+    # @genres.each do |genre|
+    #   song_genre= SongGenre.new(song: @song, genre: genre)
+    #   song_genre.save
+    # end
     
     @song.save
     redirect to "songs/#{@song.id}"
