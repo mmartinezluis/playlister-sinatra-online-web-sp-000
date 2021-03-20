@@ -21,3 +21,5 @@ ActiveRecord::Base.establish_connection(
 
 require_all 'app'
 require_all 'lib'
+#require_relative './models/concerns/slugifiable'
+#require_relative './concerns/slugifiable'

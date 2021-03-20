@@ -13,41 +13,34 @@ class SongsController < ApplicationController
 
   post '/songs' do
     #binding.pry
-    @song= Song.create(params[:song])
-    @song.artist= Artist.find_or_create_by(name: params[:artist][:name])
+    @song= Song.create(name: params["Name"])
+    @song.artist= Artist.find_or_create_by(name: params["Artist Name"])
+    @song.genre_ids= params[:genres]
     @song.save
-    redirect to "/songs/#{@song.id}"
+    flash[:message] = "Successfully created song."
+    redirect to "/songs/#{@song.slug}"
   end
 
-  get '/songs/:id/edit' do
-    @song= Song.find_by_id(params[:id])
+  get '/songs/:slug/edit' do
+    @song= Song.find_by_slug(params[:slug])
     @genres= Genre.all
     erb :'/songs/edit'
   end
 
-  get '/songs/:id' do
-    @song= Song.find(params[:id])
+  get '/songs/:slug' do
+    @song= Song.find_by_slug(params[:slug])
     erb :'/songs/show'
   end
 
-  patch '/songs/:id' do
-    binding.pry
-    @song= Song.find_by_id(params[:id])
-    @song.update(params[:song])
-    @song.artist = Artist.find_or_create_by(name: params[:artist][:name])
-    
-    #@song.genre_ids.clear
-    #@song.genre_ids= params[:song][:genre_ids]
-    #@genres= Genre.find(params[:song][:genre_ids])
-
-    # @genres.each do |genre|
-    #   song_genre= SongGenre.new(song: @song, genre: genre)
-    #   song_genre.save
-    # end
-    
+  patch '/songs/:slug' do
+    # binding.pry
+    @song= Song.find_by_slug(params[:slug])
+    @song.artist = Artist.find_or_create_by(name: params["Artist Name"])    
+    @song.genre_ids.clear
+    @song.genre_ids = params[:genres]
     @song.save
-    redirect to "songs/#{@song.id}"
-    
+    flash[:message] ="Successfully updated song."
+    redirect to "/songs/#{@song.slug}"
   end
 
 

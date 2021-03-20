@@ -1,5 +1,8 @@
+require 'rack-flash'
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
+  enable :sessions
+  use Rack::Flash
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
 
@@ -7,19 +10,5 @@ class ApplicationController < Sinatra::Base
     erb :'index'
   end
 
-  # get '/songs' do
-  #   @songs = Song.all
-  #   erb :'songs/index'
-  # end
-
-  # get '/artists' do
-  #   @songs = Song.all
-  #   erb :'songs/index'
-  # end
-
-  # get '/gnnres' do
-  #   @songs = Song.all
-  #   erb :'songs/index'
-  # end
 
 end
