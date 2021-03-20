@@ -4,6 +4,22 @@ class ApplicationController < Sinatra::Base
   set :views, Proc.new { File.join(root, "../views/") }
 
   get '/' do
-    erb :index
+    erb :'index'
   end
+
+  # get '/songs' do
+  #   @songs = Song.all
+  #   erb :'songs/index'
+  # end
+
+  # get '/artists' do
+  #   @songs = Song.all
+  #   erb :'songs/index'
+  # end
+
+  # get '/gnnres' do
+  #   @songs = Song.all
+  #   erb :'songs/index'
+  # end
+
 end
