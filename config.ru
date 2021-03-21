@@ -1,9 +1,5 @@
 require './config/environment'
-# require_relative './app/controllers/artists_controller'
-# require_relative './app/controllers/songs_controller'
-# require_relative './app/controllers/genres_controller'
-# require_relative './models/concerns/slugifiable'
-# require_relative '../models/concerns/slugifiable'
+
 
 begin
   fi_check_migration
