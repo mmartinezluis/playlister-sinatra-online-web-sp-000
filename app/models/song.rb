@@ -1,5 +1,4 @@
 class Song < ActiveRecord::Base
-  #include Slugifiable::InstanceMethods
   include Slugifiable
   extend Slugifiable
 

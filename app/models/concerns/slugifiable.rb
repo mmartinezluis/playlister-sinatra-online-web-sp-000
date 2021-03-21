@@ -8,16 +8,4 @@ module Slugifiable
   end
 end
 
-# module Slugifiable
-#   module InstanceMethods
-#     def slug
-#       self.name.downcase.gsub(" ", "-")
-#     end
-#   end
 
-#   module ClassMethods
-#     def find_by_slug
-#      seelf.find{|object| object.slug == params[:slug]}
-#     end
-#   end   
-# end
